@@ -50,10 +50,27 @@ The API will be available at `http://localhost:8000`.
 - `with_watermark` - Standard video with watermark
 - `mp3` - Audio only (MP3)
 
-## Deploy (Railway / Render)
+## Deploy to Render
 
-1. Push the `backend/` folder to a repo.
-2. Set **Start Command**: `uvicorn main:app --host 0.0.0.0 --port $PORT`
-3. Ensure `ffmpeg` is available (most Python hosting images include it, or add an apt package).
+### Option 1: Using Blueprint (Recommended)
 
-**Production Deployment:** https://web-production-14dc.up.railway.app
+1. The `render.yaml` file is already configured in this repo
+2. Go to https://dashboard.render.com/blueprints
+3. Click **New Blueprint** → Connect `JohnCarloGamayo/tiktok-downloader-backend-`
+4. Branch: `main`, Blueprint Path: `render.yaml`
+5. Click **Apply** and wait for deployment
+
+### Option 2: Manual Setup
+
+1. Create New Web Service on Render
+2. Connect your GitHub repo
+3. **Build Command**: `pip install -r requirements.txt`
+4. **Start Command**: `uvicorn main:app --host 0.0.0.0 --port $PORT`
+5. **Environment**: Python 3
+6. Deploy
+
+### After Deployment
+
+- Copy your backend URL (e.g., `https://tiktok-backend-xxxxx.onrender.com`)
+- Update frontend environment variable `VITE_API_BASE_URL` with this URL
+- Render provides built-in ffmpeg support
