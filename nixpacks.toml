@@ -1,0 +1,3 @@
+# backend/nixpacks.toml – ensures ffmpeg is available on Railway
+[phases.setup]
+aptPkgs = ["ffmpeg"]
